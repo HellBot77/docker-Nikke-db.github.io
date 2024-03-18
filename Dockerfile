@@ -20,8 +20,6 @@ RUN git clone https://github.com/Nikke-db/Nikke-db.github.io.git && \
     sed -i 's/location.href = "v"/location.href = "v.html"/' js/visualiser_m.js && \
     sed -i 's/navigator.userAgentData.mobile/(navigator.userAgent.includes("Android")||(navigator.userAgent.includes("Mac OS X")) \&\& !navigator.userAgent.includes("Macintosh"))/' js/visualiser_m.js
 
-FROM pierrezemb/gostatic
+FROM joseluisq/static-web-server
 
-COPY --from=base /git/Nikke-db.github.io /srv/http
-EXPOSE 8043
-CMD [ "-append-header=Access-Control-Allow-Origin:*" ]
+COPY --from=base /git/Nikke-db.github.io ./public
